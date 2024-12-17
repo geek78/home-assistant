@@ -23,7 +23,7 @@ blueprint:
           step: 0.001
     entity_consigne:
       name: Consigne
-      description: Champs d'entrée de la température de consigne (input number).
+      description: Champs d'entrée de la température de consigne (number).
       selector:
         entity:
           domain: number
