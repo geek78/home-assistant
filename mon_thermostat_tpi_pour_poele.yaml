@@ -67,8 +67,7 @@ trigger:
     minutes: "/10"
   - platform: state
     entity_id: !input entity_consigne
-  - platform: state
-    entity_id: !input entity_fenetre
+
 
 
 action:
