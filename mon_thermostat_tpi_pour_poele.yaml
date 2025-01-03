@@ -2,7 +2,7 @@ blueprint:
   name: Mon Thermostat TPI Pour Poele
   description: Mon Thermostat TPI (Time Propertional & Integral)
   domain: automation
-  source_url: https://github.com/geek78/home-assistant/blob/main/mon_thermostat_tpi_pour_poele.yaml
+  source_url: https://github.com/geek78/home-assistant/edit/main/mon_thermostat_tpi_pour_poele.yaml
 
   input:
     coeff_c:
