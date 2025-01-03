@@ -113,4 +113,5 @@ action:
           entity_id: !input entity_chauffage
 mode: restart
 
+mode: restart
 
