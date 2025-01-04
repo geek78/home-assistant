@@ -1,7 +1,7 @@
 blueprint:
   name: Notif actionnable pour switch
   description: |
-    Send actionable notifications to an Android device
+    Notif actionnable pour switch
     For each action, you can open an URL, an application on the device or load a lovelace view/dashboard.
     If you plan to use a lovelace view the format would be /lovelace/test where test is replaced by your defined path in the defined view.
     If you plan to use a lovelace dashboard the format would be /lovelace-dashboard/view where /lovelace-dashboard/ is replaced by your defined dashboard URL
