@@ -1,5 +1,5 @@
 blueprint:
-  name: switch : Send actionable notifications for Android
+  name: switch - Send actionable notifications for Android
   description: |
     Send actionable notifications to an Android device
     For each action, you can open an URL, an application on the device or load a lovelace view/dashboard.
