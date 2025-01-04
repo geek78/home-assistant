@@ -20,7 +20,7 @@ blueprint:
 
     trigger_entity:
       name: Trigger entity
-      description: Send the notification when this boolean turns on
+      description: Send the notification when this switch turns off
       selector:
         entity:
           domain: switch
@@ -121,8 +121,8 @@ variables:
 trigger:
   platform: state
   entity_id: !input trigger_entity
-  from: "off"
-  to: "on"
+  from: "on"
+  to: "off"
 
 action:
   # Reset trigger entity
