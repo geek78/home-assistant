@@ -60,9 +60,9 @@ action:
   - alias: récupération des données
     variables:
       entity_consigne: !input entity_consigne
-	  consigne: "{{states(entity_consigne)}}"
+      consigne: "{{states(entity_consigne)}}"
       temp_int: '{{ states(entity_temp_int) }}'
-	  hyste_up: '{{ states(hyste_up) }}'
+      hyste_up: '{{ states(hyste_up) }}'
       hyste_down: '{{ states(hyste_down) }}'
 	  
   - choose:
