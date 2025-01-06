@@ -40,12 +40,20 @@ blueprint:
       selector:
         entity:
           domain: switch
+    entity_etat_poele:
+      name: Etat du poele
+      description: Sonde de détection de l'arrêt ou la marche du poele
+      selector:
+        entity:
+          domain: sensor
+
 
 # Récupération des paramètres
 variables:
   entity_temp_int: !input entity_temp_int
   hyste_up: !input hyste_up
   hyste_down: !input hyste_down
+  entity_etat_poele: !entity_etat_poele
 
 
 trigger:
@@ -64,18 +72,20 @@ action:
       temp_int: '{{ states(entity_temp_int) }}'
       hyste_up: '{{ states(hyste_up) }}'
       hyste_down: '{{ states(hyste_down) }}'
+      entity_etat_poele: !entity_etat_poele
+      etat_poele: '{{ states(entity_etat_poele) }}'
       
   - choose:
       - conditions:
           - condition: template
-            value_template: '{{temp_int | float(1) > consigne | float(1) + hyste_up }}'
+            value_template: '{{temp_int | float(1) > consigne | float(1) + hyste_up and etat_poele="Marche" }}'
         sequence:
           - service: switch.turn_off
             target:
               entity_id: !input entity_chauffage
       - conditions:
           - condition: template
-            value_template: '{{temp_int | float(1) < consigne | float(1) - hyste_down }}'
+            value_template: '{{temp_int | float(1) < consigne | float(1) - hyste_down and etat_poele="Arrêt" }}'
         sequence:
           - service: switch.turn_on
             target:
