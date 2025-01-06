@@ -5,7 +5,7 @@ blueprint:
   source_url: https://github.com/geek78/home-assistant/edit/main/mon_thermostat_hysterisis_pour_poele.yaml
 
   input:
-     hyste_up:
+    hyste_up:
       name: Hystérisis Supérieur
       description: Delta supérieur température admis
       selector:
