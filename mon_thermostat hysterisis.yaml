@@ -1,0 +1,96 @@
+blueprint:
+  name: Mon Thermostat Hysterisis Pour Poele
+  description: Mon Thermostat Hysterisis
+  domain: automation
+  source_url: https://github.com/geek78/home-assistant/edit/main/mon_thermostat_hysterisis_pour_poele.yaml
+
+  input:
+     hyste_up:
+      name: Hystérisis Supérieur
+      description: Delta supérieur température admis
+      selector:
+        number:
+          min: 0.0
+          max: 1.0
+          step: 0.1
+    hyste_down:
+      name: Hystérisis inférieur
+      description: Delta inféreur température admis
+      selector:
+        number:
+          min: 0.5
+          max: 2
+          step: 0.1
+      name: Hystérisis inférieur
+      description: Delta inféreur température admis
+      selector:
+        number:
+          min: 0.5
+          max: 2
+          step: 0.1
+    entity_consigne:
+      name: Consigne
+      description: Champs d'entrée de la température de consigne (number).
+      selector:
+        entity:
+          domain: number
+    entity_temp_int:
+      name: Température intérieure
+      description: Sonde de mesure de la température intérieure (sensor)
+      selector:
+        entity:
+          domain: sensor
+          device_class: temperature
+    entity_chauffage:
+      name: Chauffage
+      description: Interrupteur marche / arrêt du chauffage (switch)
+      selector:
+        entity:
+          domain: switch
+
+# Récupération des paramètres
+variables:
+  entity_temp_int: !input entity_temp_int
+  hyste_up: !input hyste_up
+  hyste_down: !input hyste_down
+
+
+trigger:
+  - platform: time_pattern
+    minutes: "/30"
+  - platform: state
+    entity_id: !input entity_consigne
+
+
+
+action:
+  - alias: récupération des données
+    variables:
+      entity_consigne: !input entity_consigne
+	  consigne: "{{states(entity_consigne)}}"
+      temp_int: '{{ states(entity_temp_int) }}'
+	  hyste_up: '{{ states(hyste_up) }}'
+      hyste_down: '{{ states(hyste_down) }}'
+	  
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: '{{temp_int | float(1) > consigne | float(1) + hyste_up }}'
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: !input entity_chauffage
+      - conditions:
+          - condition: template
+            value_template: '{{temp_int | float(1) < consigne | float(1) - hyste_down }}'
+        sequence:
+          - service: switch.turn_on
+            target:
+              entity_id: !input entity_chauffage
+    default:
+      - service: switch.turn_on
+        target:
+          entity_id: !input entity_chauffage
+mode: restart
+
+mode: restart
