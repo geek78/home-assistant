@@ -70,23 +70,23 @@ action:
   - alias: récupération des données
     variables:
       entity_consigne: !input entity_consigne
-      consigne: '{{ states(entity_consigne) }}'
+
       entity_temp_int: !input entity_temp_int
-      temp_int: '{{ states(entity_temp_int) }}'
+
       entity_etat_poele: !input entity_etat_poele
-      etat_poele: '{{ states(entity_etat_poele) }}'
+  
       
   - choose:
       - conditions:
           - condition: template
-            value_template: '{{temp_int | float(1) > (consigne | float(1) + hyste_up | float(1) ) and etat_poele == "Marche" }}'
+            value_template: '{{states(entity_temp_int) | float(1) > (states(entity_consigne) | float(1) + hyste_up ) and states(entity_etat_poele) == "Marche" }}'
         sequence:
           - service: switch.turn_off
             target:
               entity_id: !input entity_chauffage
       - conditions:
           - condition: template
-            value_template: '{{temp_int | float(1) < (consigne | float(1) - hyste_down | float(1)) and etat_poele == "Arrêt" }}'
+            value_template: '{{states(entity_temp_int) | float(1) < (states(entity_consigne) | float(1) - hyste_down ) and states(entity_etat_poele) == "Arrêt" }}'
         sequence:
           - service: switch.turn_on
             target:
