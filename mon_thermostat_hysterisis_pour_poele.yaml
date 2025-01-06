@@ -54,6 +54,8 @@ variables:
   hyste_up: !input hyste_up
   hyste_down: !input hyste_down
   entity_etat_poele: !input entity_etat_poele
+  entity_consigne: !input entity_consigne
+  entity_chauffage: !input entity_chauffage
 
 
 trigger:
@@ -69,9 +71,8 @@ action:
     variables:
       entity_consigne: !input entity_consigne
       consigne: '{{ states(entity_consigne) }}'
+      entity_temp_int: !input entity_temp_int
       temp_int: '{{ states(entity_temp_int) }}'
-      hyste_up: '{{ states(hyste_up) }}'
-      hyste_down: '{{ states(hyste_down) }}'
       entity_etat_poele: !input entity_etat_poele
       etat_poele: '{{ states(entity_etat_poele) }}'
       
