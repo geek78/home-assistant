@@ -64,7 +64,7 @@ action:
       temp_int: '{{ states(entity_temp_int) }}'
       hyste_up: '{{ states(hyste_up) }}'
       hyste_down: '{{ states(hyste_down) }}'
-	  
+      
   - choose:
       - conditions:
           - condition: template
