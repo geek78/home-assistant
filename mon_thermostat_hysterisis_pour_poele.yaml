@@ -21,13 +21,6 @@ blueprint:
           min: 0.5
           max: 2
           step: 0.1
-      name: Hystérisis inférieur
-      description: Delta inféreur température admis
-      selector:
-        number:
-          min: 0.5
-          max: 2
-          step: 0.1
     entity_consigne:
       name: Consigne
       description: Champs d'entrée de la température de consigne (number).
