@@ -53,7 +53,7 @@ variables:
   entity_temp_int: !input entity_temp_int
   hyste_up: !input hyste_up
   hyste_down: !input hyste_down
-  entity_etat_poele: !entity_etat_poele
+  entity_etat_poele: !input entity_etat_poele
 
 
 trigger:
@@ -72,7 +72,7 @@ action:
       temp_int: '{{ states(entity_temp_int) }}'
       hyste_up: '{{ states(hyste_up) }}'
       hyste_down: '{{ states(hyste_down) }}'
-      entity_etat_poele: !entity_etat_poele
+      entity_etat_poele: !input entity_etat_poele
       etat_poele: '{{ states(entity_etat_poele) }}'
       
   - choose:
