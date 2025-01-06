@@ -79,14 +79,14 @@ action:
   - choose:
       - conditions:
           - condition: template
-            value_template: '{{states(entity_temp_int) | float(1) > (states(entity_consigne) | float(1) + hyste_up ) and states(entity_etat_poele) == "Marche" }}'
+            value_template: '{{states(!input entity_temp_int) | float(1) > (states(!input entity_consigne) | float(1) + hyste_up ) and states(!input entity_etat_poele) == "Marche" }}'
         sequence:
           - service: switch.turn_off
             target:
               entity_id: !input entity_chauffage
       - conditions:
           - condition: template
-            value_template: '{{states(entity_temp_int) | float(1) < (states(entity_consigne) | float(1) - hyste_down ) and states(entity_etat_poele) == "Arrêt" }}'
+            value_template: '{{states(!input entity_temp_int) | float(1) < (states(!input entity_consigne) | float(1) - hyste_down ) and states(!input entity_etat_poele) == "Arrêt" }}'
         sequence:
           - service: switch.turn_on
             target:
