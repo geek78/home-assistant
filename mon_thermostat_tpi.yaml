@@ -82,9 +82,9 @@ action:
   - alias: récupération des données
     variables:
       entity_consigne: !input entity_consigne
-      consigne: "{{states(entity_consigne)}}"
-      temp_ext: '{{ states(entity_temp_ext) }}'
-      temp_int: '{{ states(entity_temp_int) }}'
+      consigne: "{{states(entity_consigne) | float(1)}}"
+      temp_ext: '{{ states(entity_temp_ext) | float(1) }}'
+      temp_int: '{{ states(entity_temp_int) | float(1) }}'
       fenetre: '{{states(entity_fenetre)}}'     
       puissance: >-
         {%set val = coeff_c * (consigne - temp_int) + coeff_t * (consigne -
